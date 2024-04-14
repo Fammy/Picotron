@@ -1,0 +1,75 @@
+picotron cartridge // www.picotron.net
+version 2
+
+:: gfx/
+:: gfx/0.gfx
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI0LTAzLTI1IDAwOjEyOjQ1Iixtb2RpZmllZD0iMjAyNC0w
+My0yNiAwMjo1NDoxNSIscmV2aXNpb249NDhdXWx6NABtAAAABTEAAPMUe1swXT17Ym1wPXB4dQBD
+IBAQBPDwLGZsYWdzPTAscGFuX3gIAM95PTAsem9vbT04fSwxAP--------------------------
+-------------------------------------_dQbT04fX0=
+:: gfx/.info.pod
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI0LTAzLTI1IDAwOjEyOjQ1IixzdG9yZWQ9IjIwMjQtMDMt
+MjUgMDA6MTI6NDUiXV1sejQABAAAAAMAAAAwbmls
+:: main.lua
+--[[pod_format="raw",created="2024-03-25 00:12:45",modified="2024-03-26 02:54:15",revision=94]]
+-- circle_wallpaper
+
+function _init()
+	x=rnd(480)
+	y=rnd(240)
+	c=1
+	r=64
+	tick=0
+	
+	stack = {}
+end
+
+function _update()
+	tick+=1
+	if (tick>=5) then tick=0 end
+
+	c=rnd(31)+ 1
+	r-=.1
+	
+	if (r<10) then
+--		cls(0)
+		x=rnd(480)
+		y=rnd(240)
+		c=1
+		r=64
+	end
+end
+
+function _draw()
+	if (tick==0) then
+		circfill(rnd(480),rnd(270),rnd(48)+16,rnd(31)+1)
+	end
+end
+:: map/
+:: map/0.map
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI0LTAzLTI1IDAwOjEyOjQ1Iixtb2RpZmllZD0iMjAyNC0w
+My0yNiAwMjo1NDoxNSIscmV2aXNpb249NDddXWx6NABoAAAAWBAAAPAIe3tibXA9dXNlcmRhdGEo
+ImkxNiIsMzIDAC8iMAEA--------------------_-EIIiksaGlkZGVuPWZhbHNlLHBhbl94PTAI
+ANJ5PTAsdGlsZV9oPTE2CgAQdwoAgHpvb209MX19
+:: map/.info.pod
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI0LTAzLTI1IDAwOjEyOjQ1IixzdG9yZWQ9IjIwMjQtMDMt
+MjUgMDA6MTI6NDUiXV1sejQABAAAAAMAAAAwbmls
+:: sfx/
+:: sfx/0.sfx
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI0LTAzLTI1IDAwOjEyOjQ1Iixtb2RpZmllZD0iMjAyNC0w
+My0yNiAwMjo1NDoxNiIscmV2aXNpb249NDVdXWx6NAAQAQAAUQcAAPAncHh1AAMoAAADAAQPQBAC
+DgABoAEgAqAOAA8QAA3wygECAwQFBgcAD-_QCAkKCw8MDw0PDg8PEADwAA0PEQ8SDxMPFA8VDxYP
+FxMA8QEPGA8ZDxoPGw8cDx0PHg8fFADxACAPIQ8iDyMPJA8lDyYPJxQA8QAoDykPKg8rDywPLQ8u
+Dy8UAPEAMA8xDzIPMw80DzUPNg83FAD-BTgPOQ86DzsPPA89Dz4PPwAP--D-AQDr-ydaARAGDyAQ
+ASABIAHwAAIQAgwQASAPISABMA9A8MMPKA--8MYP_AoP-w_AD-cPDQHwCQEQBgwwAP85H-8BANy-
+_A9AAA1A--_w8HAKAP--ZB--AQCXUP----8f
+:: sfx/.info.pod
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI0LTAzLTI1IDAwOjEyOjQ1IixzdG9yZWQ9IjIwMjQtMDMt
+MjUgMDA6MTI6NDUiXV1sejQABAAAAAMAAAAwbmls
+:: .info.pod
+b64$LS1bW3BvZCxzdG9yZWQ9IjIwMjQtMDMtMjYgMDI6NTQ6MTYiLHdvcmtzcGFjZXM9e3tsb2Nh
+dGlvbj0ibWFpbi5sdWEjMSIsd29ya3NwYWNlX2luZGV4PTF9LHtsb2NhdGlvbj0iZ2Z4LzAuZ2Z4
+Iix3b3Jrc3BhY2VfaW5kZXg9Mn0se2xvY2F0aW9uPSJtYXAvMC5tYXAiLHdvcmtzcGFjZV9pbmRl
+eD0zfSx7bG9jYXRpb249InNmeC8wLnNmeCIsd29ya3NwYWNlX2luZGV4PTR9fV1dbHo0AAQAAAAD
+AAAAMG5pbA==
+:: [eoc]
