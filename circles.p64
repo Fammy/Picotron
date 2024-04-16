@@ -1,0 +1,122 @@
+picotron cartridge // www.picotron.net
+version 2
+
+:: gfx/
+:: map/
+:: sfx/
+:: gfx/0.gfx
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI0LTA0LTE2IDIyOjM1OjQ3Iixtb2RpZmllZD0iMjAyNC0w
+NC0xNiAyMjo1ODowNSIscmV2aXNpb249NjNdXWx6NABtAAAABTEAAPMUe1swXT17Ym1wPXB4dQBD
+IBAQBPDwLGZsYWdzPTAscGFuX3gIAM95PTAsem9vbT04fSwxAP--------------------------
+-------------------------------------_dQbT04fX0=
+:: gfx/.info.pod
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI0LTA0LTE2IDIyOjM1OjQ3IixzdG9yZWQ9IjIwMjQtMDQt
+MTYgMjI6MzU6NDciXV1sejQABAAAAAMAAAAwbmls
+:: main.lua
+--[[pod_format="raw",created="2024-04-16 22:35:47",modified="2024-04-16 22:58:05",revision=125]]
+include("qsort.lua")
+
+function _init()
+	objs = {}
+	for i = 1,250 do
+		local obj = {
+			x = rnd(480),
+			y = rnd(270),
+			r = rnd(4),
+			c = rnd(15)+1,
+			--v = rnd(5)
+		}
+		obj.v = obj.r/2
+		add(objs, obj)
+	end
+	qsort(objs, function(a,b) return a.r<b.r end)
+end
+
+function _update()
+	for obj in all(objs) do
+		obj.x += obj.v
+		if (obj.x - obj.r > 480) then
+			obj.x = -obj.r
+		end
+	end
+end
+
+function _draw()
+	cls(0)
+	for obj in all(objs) do
+		circfill(obj.x, obj.y, obj.r, obj.c)
+		circfill(obj.x, obj.y, obj.r, obj.c)
+		circfill(obj.x, obj.y, obj.r, obj.c)
+	end
+end
+
+:: map/0.map
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI0LTA0LTE2IDIyOjM1OjQ3Iixtb2RpZmllZD0iMjAyNC0w
+NC0xNiAyMjo1ODowNSIscmV2aXNpb249NjNdXWx6NABUAAAARBAAAPAIe3tibXA9dXNlcmRhdGEo
+ImkxNiIsMzIDAC8iMAEA--------------------_6EiKSxwYW5feD0wCADSeT0wLHRpbGVfaD0x
+NgoAYHc9MTZ9fQ==
+:: map/.info.pod
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI0LTA0LTE2IDIyOjM1OjQ3IixzdG9yZWQ9IjIwMjQtMDQt
+MTYgMjI6MzU6NDciXV1sejQABAAAAAMAAAAwbmls
+:: qsort.lua
+--[[pod_format="raw",created="2024-04-16 22:56:53",modified="2024-04-16 22:58:05",revision=8]]
+-- common comparators
+function  ascending(a,b) return a<b end
+function descending(a,b) return a>b end
+
+-- a: array to be sorted in-place
+-- c: comparator (optional, defaults to ascending)
+-- l: first index to be sorted (optional, defaults to 1)
+-- r: last index to be sorted (optional, defaults to #a)
+function qsort(a,c,l,r)
+    c,l,r=c or ascending,l or 1,r or #a
+    if l<r then
+        if c(a[r],a[l]) then
+            a[l],a[r]=a[r],a[l]
+        end
+        local lp,rp,k,p,q=l+1,r-1,l+1,a[l],a[r]
+        while k<=rp do
+            if c(a[k],p) then
+                a[k],a[lp]=a[lp],a[k]
+                lp+=1
+            elseif not c(a[k],q) then
+                while c(q,a[rp]) and k<rp do
+                    rp-=1
+                end
+                a[k],a[rp]=a[rp],a[k]
+                rp-=1
+                if c(a[k],p) then
+                    a[k],a[lp]=a[lp],a[k]
+                    lp+=1
+                end
+            end
+            k+=1
+        end
+        lp-=1
+        rp+=1
+        a[l],a[lp]=a[lp],a[l]
+        a[r],a[rp]=a[rp],a[r]
+        qsort(a,c,l,lp-1       )
+        qsort(a,c,  lp+1,rp-1  )
+        qsort(a,c,       rp+1,r)
+    end
+end
+:: sfx/0.sfx
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI0LTA0LTE2IDIyOjM1OjQ4Iixtb2RpZmllZD0iMjAyNC0w
+NC0xNiAyMjo1ODowNiIscmV2aXNpb249NjJdXWx6NAARAQAAwQgAAPAncHh1AAMoAAADAAQPQBAC
+DgABoAEgAqAOAA8QAA3wygECAwQFBgcAD-_QCAkKCw8MDw0PDg8PEADwAA0PEQ8SDxMPFA8VDxYP
+FxMA8QEPGA8ZDxoPGw8cDx0PHg8fFADxACAPIQ8iDyMPJA8lDyYPJxQA8QAoDykPKg8rDywPLQ8u
+Dy8UAPEAMA8xDzIPMw80DzUPNg83FAD-BTgPOQ86DzsPPA89Dz4PPwAP--D-AQDr-ydaARAGDyAQ
+ASABIAHwAAIQAgwQASAPISABMA9A8MMPKA--8MYP_AoP-w_AD-cPDQHwCQEQBgwwAP--uh--AQDM
+v_gPQAANQP--sPBwCgD--2Qf-wEAl1D-----Hw==
+:: sfx/.info.pod
+b64$LS1bW3BvZCxjcmVhdGVkPSIyMDI0LTA0LTE2IDIyOjM1OjQ3IixzdG9yZWQ9IjIwMjQtMDQt
+MTYgMjI6MzU6NDciXV1sejQABAAAAAMAAAAwbmls
+:: .info.pod
+b64$LS1bW3BvZCxydW50aW1lPTUsc3RvcmVkPSIyMDI0LTA0LTE2IDIyOjU4OjA2Iix3b3Jrc3Bh
+Y2VzPXt7bG9jYXRpb249Im1haW4ubHVhIzEiLHdvcmtzcGFjZV9pbmRleD0xfSx7bG9jYXRpb249
+InFzb3J0Lmx1YSM0MSIsd29ya3NwYWNlX2luZGV4PTF9LHtsb2NhdGlvbj0iZ2Z4LzAuZ2Z4Iix3
+b3Jrc3BhY2VfaW5kZXg9Mn0se2xvY2F0aW9uPSJtYXAvMC5tYXAiLHdvcmtzcGFjZV9pbmRleD0z
+fSx7bG9jYXRpb249InNmeC8wLnNmeCIsd29ya3NwYWNlX2luZGV4PTR9fV1dbHo0AAQAAAADAAAA
+MG5pbA==
+:: [eoc]
